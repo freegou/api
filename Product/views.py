@@ -36,7 +36,7 @@ class Product_list(APIView):
                 'value': sku.value,
                 'description': sku.description,
                 'price': price,
-                'stock': Unit.objects.filter(product=product,shop=pk).aggregate(stock=Sum('number'))
+                'stock': Unit.objects.filter(product=product,shop=pk).aggregate(stock=Sum('number'))['stock']
             }
             goods.append(resp)
         return HttpResponse(json.dumps(goods), content_type="application/json")
